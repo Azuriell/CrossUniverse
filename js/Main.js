@@ -26,7 +26,7 @@ container.appendChild(renderer.domElement);
 game.init();
 
 function render(){
-  requestAnimationFrame(animate);
+  // requestAnimationFrame(animate);
   renderer.render(scene, camera);
   game.update();
   game.render();
