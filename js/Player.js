@@ -1,8 +1,8 @@
 class Player{
   constructor(pos, life_max, angle, size, speed, model){
     /* Position */
-    this.pos    = pos;
-    this.angle  = angle;
+    // this.pos    = pos;
+    // this.angle  = angle;
     this.size   = size;
 
     /* Mouvements */
@@ -15,47 +15,57 @@ class Player{
     this.speed      = speed;
     this.hitbox     = this.size.height;
 
-    /* Loader */
-    this.venator = null;
+    /* Obj */
     this.model = model;
-
-    this.objLoader = new THREE.OBJLoader();
-    this.objLoader.setPath('model/');
-    this.objLoader.load(this.model, function (object){ 
-      // scene.add(this.object);
-      this.venator = object;
-      this.venator.rotateX(-1.3);
-      this.venator.rotateZ(3.13);
-
-      this.venator.children[0].geometry.computeFaceNormals();
-
-      // materials
-      const path = 'textures/';
-      const textureLoader = new THREE.TextureLoader();
-
-      var material = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        metalness: .8,
-        roughness: .5
-      });
-
-      this.venator.material = material;
-
-      this.venator.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.material = material;
-        }
-      });  
-    }, this.onProgress, this.onError);
 
     /* init */
     this.init();
   }
   init(){
-    scene.add(this.venator);
-    // this.objLoader.position.set(this.pos.x,this.pos.y,this.pos.z);
-    // this.objLoader.rotation.set(this.angle.x,this.angle.y,this.angle.z);
+    this.objLoader = new THREE.OBJLoader();
+    this.objLoader.setPath('model/');
+    this.objLoader.load(this.model, this.onLoad, this.onProgress, this.onError);
+    // scene.add(this.venator);
+    // console.log(venator);
   }
+
+  onLoad(object){
+    venator = object;
+    scene.add(venator);
+    venator.position.set(0,0,0);
+    venator.rotation.set(-1.3,1.56,2.88);
+    // console.log(this);
+
+    venator.children[0].geometry.computeFaceNormals();
+
+    // materials
+    // const path = 'textures/';
+    // const textureLoader = new THREE.TextureLoader();
+
+    var material = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      metalness: .8,
+      roughness: .5
+    });
+
+    venator.material = material;
+
+    venator.traverse(function (child) {
+      if (child instanceof THREE.Mesh) {
+        child.material = material;
+      }
+    });  
+    window.venator = 'venator';
+  }
+
+  onProgress(xhr){
+    if (xhr.lengthComputable) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      console.log(Math.round(percentComplete, 2) + '% downloaded');
+    }
+  }
+
+  onError(xhr){}
 
   update(){
     //boundaries
@@ -82,13 +92,4 @@ class Player{
 
     this.object.rotation.set(this.angle.x,this.angle.y,this.angle.z);   
   }
-
-  onProgress(xhr){
-    if (xhr.lengthComputable) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
-      console.log(Math.round(percentComplete, 2) + '% downloaded');
-    }
-  }
-
-  onError(xhr){}
 }
