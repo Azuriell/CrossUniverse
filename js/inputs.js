@@ -1,13 +1,18 @@
 let inputs = {
     _pressed: {},
 
-    LEFT: 81,
-    UP: 90,
-    RIGHT: 68,
-    DOWN: 83,
-    ACTION: 32,
-    E: 69,
-    
+    Q: 81,
+    Z: 90,
+    D: 68,
+    S: 83,
+    ACTION1: 32,
+
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40,
+    ACTION2: 13,
+
     isDown: function(keyCode) {
         return this._pressed[keyCode];
     },

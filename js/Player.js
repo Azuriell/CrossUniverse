@@ -28,8 +28,6 @@ class Player{
   onLoad(object){
     venator = object;
     scene.add(venator);
-    venator.position.set(-400,0,0);
-    venator.rotation.set(-1.3,1.56,2.88);
     // galactica.position.set(400,0,0);
     // galactica.rotation.set(-1.3,1.56,2.88);
     // console.log(venator);
@@ -67,16 +65,16 @@ class Player{
 
   // Movement
   moveLeft(){
-    this.velocity.x+=this.speed*-1;
+    this.velocity.x+=this.speed/-1;
   }
   moveRight(){
-    this.velocity.x+=this.speed;
+    this.velocity.x+=this.speed/1;
   }
   moveUp(){
-    this.velocity.y+=this.speed;
+    this.velocity.y+=this.speed/1;
   }
   moveDown(){
-    this.velocity.y+=this.speed*-1;
+    this.velocity.y+=this.speed/-1;
   }
 
   init(){
@@ -89,14 +87,15 @@ class Player{
 
   update(){
     //boundaries
-    if (this.pos.x+this.velocity.x>=windowHalfLeft+this.size.height && this.pos.x+this.velocity.x<=windowHalfRight-this.size.height) {
+    // console.log(this.obj)
+    if (this.pos.x+this.velocity.x>=windowLeft+this.size.height && this.pos.x+this.velocity.x<=windowRight-this.size.height) {
       this.pos.x+=this.velocity.x;
     };
-    if (this.pos.y+this.velocity.y>=windowHalfBottom+this.size.height*3 && this.pos.y+this.velocity.y<=windowHalfTop-this.size.height) {
+    if (this.pos.y+this.velocity.y>=windowBottom+this.size.height*3 && this.pos.y+this.velocity.y<=windowTop-this.size.height) {
       this.pos.y+=this.velocity.y;
     }
 
-    this.angle.x+=this.rotation.x;
+    // this.angle.x+=this.rotation.x;
     this.angle.y+=this.rotation.y;
 
     // Direction du "regard" du vaisseau
@@ -105,14 +104,13 @@ class Player{
 
     this.velocity.x=this.velocity.x/1.08;
     this.velocity.y=this.velocity.y/1.08;
-    //console.log(this.pos);
+    // console.log(this.velocity);
   }
 
   render(){
     if (scene.children[this.playerNumber+2]) {
       scene.children[this.playerNumber+2].position.set(this.pos.x,this.pos.y,this.pos.z);
       scene.children[this.playerNumber+2].rotation.set(this.angle.x,this.angle.y,this.angle.z); 
-      console.log(scene.children[this.playerNumber+2].position)
     }  
   }
 }
