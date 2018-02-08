@@ -9,7 +9,7 @@ class Bullet{
 		/* Position */
 		this.pos		= {x:10, y:5};
 		this.angle      = {x:0, y:0, z:0};
-		this.size		= {x:30, y:15, z:2};
+		this.size		= {x:45, y:30, z:2};
 		this.dist 		= {x:0, y:0};
 
 		/* Mouvements */
@@ -78,10 +78,10 @@ class Bullet{
 
 		if (this.team==1){
 			this.velocity = {x:Math.cos(this.angle.z), y:Math.sin(this.angle.z)};
-			this.speed = -25;
+			this.speed = -10;
 		}else{
 			this.velocity = {x:Math.cos(this.angle.z), y:Math.sin(this.angle.z)};
-			this.speed = -25;
+			this.speed = -10;
 		}
 		this.init();
 		this.isDisp= true;

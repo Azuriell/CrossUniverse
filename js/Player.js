@@ -31,15 +31,7 @@ class Player{
   onLoad(object){
     venator = object;
     scene.add(venator);
-    // galactica.position.set(400,0,0);
-    // galactica.rotation.set(-1.3,1.56,2.88);
-    // console.log(venator);
-
     venator.children[0].geometry.computeFaceNormals();
-
-    // materials
-    // const path = 'textures/';
-    // const textureLoader = new THREE.TextureLoader();
 
     var material = new THREE.MeshStandardMaterial({
       color: 0xffffff,
@@ -48,7 +40,6 @@ class Player{
     });
 
     venator.material = material;
-
     venator.traverse(function (child) {
       if (child instanceof THREE.Mesh) {
         child.material = material;
@@ -68,16 +59,16 @@ class Player{
 
   // Movement
   moveLeft(){
-    this.velocity.x+=this.speed/-1;
+    this.velocity.x+=this.speed*-1;
   }
   moveRight(){
-    this.velocity.x+=this.speed/1;
+    this.velocity.x+=this.speed;
   }
   moveUp(){
-    this.velocity.y+=this.speed/1;
+    this.velocity.y+=this.speed;
   }
   moveDown(){
-    this.velocity.y+=this.speed/-1;
+    this.velocity.y+=this.speed*-1;
   }
 
   init(){
@@ -85,12 +76,10 @@ class Player{
     this.objLoader.setPath('model/');
     this.objLoader.load(this.model, this.onLoad, this.onProgress, this.onError);
     this.obj = JSON.parse(localStorage.getItem('playerObj'));
-    // scene.add(this.venator);
   }
 
   update(){
     //boundaries
-    // console.log(this.obj)
     if (this.pos.x+this.velocity.x>=windowLeft+this.size.height && this.pos.x+this.velocity.x<=windowRight-this.size.height) {
       this.pos.x+=this.velocity.x;
     };
@@ -114,6 +103,9 @@ class Player{
         this.canShoot = true;
       }
     }
+    if (this.life<=0){
+      this.kill();
+    }
   }
 
   render(){
@@ -135,5 +127,15 @@ class Player{
         }
       }
     }
+  }
+
+  kill(){
+      scene.remove(this.obj);
+      game.endGame=true;
+      if (this.playerNumber==1) {
+        game.score.player1++;
+      }else{
+        game.score.player2++;
+      }
   }
 }

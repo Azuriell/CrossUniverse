@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+	<head>
+		<title>CrossUniverse</title>
+  		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="js/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/Main.css">
+	</head>
+	<body>
+		<h1>Fin du Round !</h1>
 
-<head>
-  <title>three.js webgl - OBJLoader + MTLLoader</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-</head>
+		<a href="Game.html"><button>Round suivant</button></a>
+		<a href="Main.html" onclick="clearScore()"><button>Retour au menu</button></a>
 
-<body>
-</body>
-
+		<h2>Score : </h2>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5" >
+						<p style="text-align: center;" class="scoreJ1">0</p>
+					</div>
+					<div class="col-md-2">
+						<p style="text-align: center;">|</p>
+					</div>
+					<div>
+						<p style="text-align: center;" class="scoreJ2">0</p>
+					</div>
+				</div>
+			</div>
+		<script src="js/three.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/gameOver.js"></script>
+	</body>
 </html>
