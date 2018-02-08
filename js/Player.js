@@ -1,5 +1,5 @@
 class Player{
-  constructor(pos, life_max, angle, size, speed, model, playerNumber){
+  constructor(pos, life_max, angle, size, speed, model, playerNumber, damage){
     /* Position */
     this.pos    = pos;
     this.angle  = angle;
@@ -15,6 +15,9 @@ class Player{
     this.speed      = speed;
     this.hitbox     = this.size.height;
     this.playerNumber = playerNumber;
+    this.damage   = damage;
+    this.canShoot = true;
+    this.coolDown = 0;
 
     /* Obj */
     this.model = model;
@@ -95,7 +98,6 @@ class Player{
       this.pos.y+=this.velocity.y;
     }
 
-    // this.angle.x+=this.rotation.x;
     this.angle.y+=this.rotation.y;
 
     // Direction du "regard" du vaisseau
@@ -104,7 +106,14 @@ class Player{
 
     this.velocity.x=this.velocity.x/1.08;
     this.velocity.y=this.velocity.y/1.08;
-    // console.log(this.velocity);
+
+    if(!this.canShoot){
+      this.coolDown ++;
+      if (this.coolDown >= 100){
+        this.coolDown = 0;
+        this.canShoot = true;
+      }
+    }
   }
 
   render(){
@@ -112,5 +121,19 @@ class Player{
       scene.children[this.playerNumber+2].position.set(this.pos.x,this.pos.y,this.pos.z);
       scene.children[this.playerNumber+2].rotation.set(this.angle.x,this.angle.y,this.angle.z); 
     }  
+  }
+
+  shoot(){
+    if(this.canShoot){
+      let pos = Object.assign({},this.pos);
+      let angle = Object.assign({},this.angle);
+      for (var i = 0; i < game.elements.bullet.length; i++) {
+        if(!game.elements.bullet[i].isDisp){
+          game.elements.bullet[i].spawn(pos, angle, this.damage, this.playerNumber);
+          this.canShoot = false;
+          break;
+        }
+      }
+    }
   }
 }

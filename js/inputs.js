@@ -5,13 +5,13 @@ let inputs = {
     Z: 90,
     D: 68,
     S: 83,
-    ACTION1: 32,
+    SHOOT1: 32,
 
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
     DOWN: 40,
-    ACTION2: 13,
+    SHOOT2: 13,
 
     isDown: function(keyCode) {
         return this._pressed[keyCode];
