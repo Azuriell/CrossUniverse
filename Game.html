@@ -5,9 +5,27 @@
   <title>CrossUniverse</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="js/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/Main.css">
 </head>
 <body style="margin: 0">
   <audio src="PreludetoWar.mp3" autoplay loop></audio>
+  <div class="container" style="position: absolute;">
+    <div class="row">
+      <div class="col-md-6" style="color: #ffffff; text-align: center;"> 
+        <p style="display: inline-block;">Player 1 :</p>  
+        <p style="display: inline-block;" class="lifej1">50</p>
+        <p style="display: inline-block;">/</p>
+        <p style="display: inline-block;" class="life_max1">50</p>
+      </div>
+      <div class="col-md-6" style="color: #ffffff; text-align: center;">  
+        <p style="display: inline-block;">Player 2 :</p>   
+        <p style="display: inline-block;" class="lifej2">60</p>
+        <p style="display: inline-block;">/</p>
+        <p style="display: inline-block;" class="life_max2">60</p>
+      </div>
+    </div>
+  </div>
 
   <script src="js/three.min.js"></script>
   <script src="js/jquery.min.js"></script>
@@ -19,5 +37,6 @@
   <script src="js/inputs.js"></script>
   <script src="js/Game.js"></script>
   <script src="js/Main.js"></script>
-</body>
+<!--   <script src="js/GameHUD.js"></script>
+ --></body>
 </html>

@@ -11,9 +11,9 @@ var game = {
 
   init(){
     //Création de l'instance du Joueur 2
-    this.elements.player.push( new Player({x:-1000,y:0,z:0},50,{x:0,y:0,z:0},{width:0,height:150,depth:0},0.35,"Galactica.obj",2,10));
+    this.elements.player.push( new Player({x:-1000,y:0,z:0},50,{x:0,y:0,z:0},{width:0,height:150,depth:0},0.25,"Galactica.obj",2,10));
     //Création de l'instance du Joueur 1
-    this.elements.player.push( new Player({x:1000,y:0,z:0},60,{x:0,y:0,z:3.13},{width:0,height:250,depth:0},0.25,"Venator.obj",1,20));
+    this.elements.player.push( new Player({x:1000,y:0,z:0},60,{x:0,y:0,z:3.13},{width:0,height:250,depth:0},0.35,"Venator.obj",1,15));
     //Pool de projectilles
     for (let i = 0; i < 200; i++) {
       this.elements.bullet.push( new Bullet() );
@@ -48,7 +48,7 @@ var game = {
 
     if(inputs.isDown(inputs.SHOOT2)) player2.shoot();
 
-    //vérifie la défaite
+    //Vérifie la défaite
     if (this.endGame) {
       if (JSON.parse(localStorage.getItem("score")) != undefined) {
         let score = JSON.parse(localStorage.getItem("score"))
@@ -59,6 +59,17 @@ var game = {
       localStorage.setItem("score",JSON.stringify(this.score));
       window.location.replace("./GameOver.html");
     }
+
+    //Vérifie la life
+    // let target1 = this.elements.player[0];
+    // let target2 = this.elements.player[1];
+    // if (JSON.parse(localStorage.getItem("life")) != undefined) {
+    //   let life = JSON.parse(localStorage.getItem("life"))
+    //   target1.life += life.player1;
+    //   target2.life += life.player2;
+    // }
+    // localStorage.setItem("life1",JSON.stringify(target1.life));
+    // localStorage.setItem("life2",JSON.stringify(target2.life));      
     this.collide();
   },
   render(){
@@ -74,6 +85,7 @@ var game = {
       let bullet = this.elements.bullet[i];
       let target;
       if(bullet.isDisp){
+        // Hitbox de bullet
         let circle1 = {radius: bullet.hitbox, 
                        x: bullet.pos.x, 
                        y: bullet.pos.y
@@ -83,16 +95,16 @@ var game = {
         }else if(bullet.team == 2){
           target = this.elements.player[1];
         }
+        // Hitbox du vaisseau ennemi
         let circle2 = {radius: target.hitbox, 
                        x: target.pos.x, 
                        y: target.pos.y
         };
-
+        // Calcul de la colision
         let dx = circle1.x - circle2.x;
         let dy = circle1.y - circle2.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < circle1.radius + circle2.radius && bullet.hitbox) {
+        if (distance < circle1.radius + circle2.radius && bullet.hitbox) {       
           bullet.hit=false;
           bullet.collide(target);
         }

@@ -25,9 +25,8 @@ class Player{
 
     /* init */
     this.init();
-
   }
-
+  // OBJ chargé
   onLoad(object){
     venator = object;
     scene.add(venator);
@@ -47,17 +46,17 @@ class Player{
     }); 
     localStorage.setItem('playerObj',JSON.stringify(venator));
   }
-
+  // OBJ en chargement
   onProgress(xhr){
     if (xhr.lengthComputable) {
       var percentComplete = xhr.loaded / xhr.total * 100;
       console.log(Math.round(percentComplete, 2) + '% downloaded');
     }
   }
-
+  // Erreur dans le chargement
   onError(xhr){}
 
-  // Movement
+  // Mouvement
   moveLeft(){
     this.velocity.x+=this.speed*-1;
   }
@@ -103,6 +102,7 @@ class Player{
         this.canShoot = true;
       }
     }
+    // Destruction 
     if (this.life<=0){
       this.kill();
     }
@@ -114,7 +114,7 @@ class Player{
       scene.children[this.playerNumber+2].rotation.set(this.angle.x,this.angle.y,this.angle.z); 
     }  
   }
-
+  // Action du player (tire)
   shoot(){
     if(this.canShoot){
       let pos = Object.assign({},this.pos);
@@ -128,7 +128,7 @@ class Player{
       }
     }
   }
-
+  // Lorsque le player meurt
   kill(){
       scene.remove(this.obj);
       game.endGame=true;

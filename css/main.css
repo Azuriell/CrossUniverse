@@ -6,6 +6,11 @@ header{
 
 body {
   background-color: #606B6E;
+  overflow: hidden;
+}
+
+.container{
+  width: 1538px;
 }
 
 p{

@@ -9,6 +9,5 @@ function clearScore(){
 	localStorage.clear();
 }
 
-$(".scoreJ1").html(score.player1)
-$(".scoreJ2").html(score.player2)
-
+$(".scoreJ1").html(score.player1);
+$(".scoreJ2").html(score.player2);
